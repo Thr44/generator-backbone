@@ -211,6 +211,11 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.copy('app/favicon.ico', this.env.options.appPath + '/favicon.ico');
   this.copy('app/robots.txt', this.env.options.appPath + '/robots.txt');
   this.copy('app/htaccess', this.env.options.appPath + '/.htaccess');
+  this.copy('app/scripts/lib/.', this.env.options.appPath + '/scripts/lib/.');
+  this.copy('app/scripts/locale/.', this.env.options.appPath + '/scripts/locale/.');
+  this.copy('app/scripts/locale/.', this.env.options.appPath + '/scripts/locale/.');
+  this.copy('app/scripts/models/.', this.env.options.appPath + '/scripts/models/.');
+  this.copy('app/scripts/views/.', this.env.options.appPath + '/scripts/views/.');
   this.write(this.env.options.appPath + '/index.html', this.indexFile);
 };
 
