@@ -225,7 +225,7 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.copy('app/scripts/locale/strings-es.coffee', this.env.options.appPath + '/scripts/locale/strings-es.coffee');
   this.copy('app/scripts/models/backbone.sync.js', this.env.options.appPath + '/scripts/models/backbone.sync.js');
   this.copy('app/scripts/views/element_view.js.coffee', this.env.options.appPath + '/scripts/views/element_view.js.coffee');
-  this.copy('app/scripts/views/d3_view.js.coffee', this.env.options.appPath + '/scripts/views/element_view.js.coffee');
+  this.copy('app/scripts/views/d3_view.js.coffee', this.env.options.appPath + '/scripts/views/d3_view.js.coffee');
   this.copy('app/scripts/views/collection_view.js.coffee', this.env.options.appPath + '/scripts/views/collection_view.js.coffee');
   this.copy('app/styles/main.scss', this.env.options.appPath + '/styles/main.scss');
   this.template('app/scripts/router.coffee', this.env.options.appPath + '/scripts/router.coffee');
