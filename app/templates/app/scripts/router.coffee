@@ -1,4 +1,4 @@
-class bestiario.Router extends Backbone.Router
+class <%= _.camelize(appname) %>.Router extends Backbone.Router
 
   appViews:{}
   dataModels:{}
