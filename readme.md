@@ -2,7 +2,8 @@
 
 Maintainer: [Miguel Cardoso](https://github.com/Thr44)
 
-A Backbone generator forked from Revath S Kumar, with some extra components.
+A Backbone generator forked from Revath S Kumar, with some extra components originally developed by http://www.aerstudio.com/ and extended by thr44
+
 Rather use backbone-generator from Yeoman Team!!
 
 
