@@ -16,9 +16,9 @@ var Generator = module.exports = function Generator(args, options, config) {
   this.config.set('appPath', this.env.options.appPath);
 
   this.testFramework = this.options['test-framework'] || 'mocha';
-  this.templateFramework = this.options['template-framework'] || 'lodash';
+  this.templateFramework = this.options['template-framework'] || 'handlebars';
 
-  if (['app', 'backbone'].indexOf(this.generatorName) >= 0) {
+  if (['app', 'bestiario'].indexOf(this.generatorName) >= 0) {
     this.hookFor(this.testFramework, {
       as: 'app',
       options: {
@@ -41,7 +41,7 @@ var Generator = module.exports = function Generator(args, options, config) {
   this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
 
   this.on('end', function () {
-    if (['app', 'backbone'].indexOf(this.generatorName) >= 0) {
+    if (['app', 'bestiario'].indexOf(this.generatorName) >= 0) {
       if (/^.*test$/.test(process.cwd())) {
         process.chdir('..');
       }
@@ -70,7 +70,7 @@ Generator.prototype.askFor = function askFor() {
     }, {
       name: 'Use CoffeeScript',
       value: 'coffee',
-      checked: this.options.coffee || false
+      checked: this.options.coffee || true
     }, {
       name: 'Use RequireJs',
       value: 'requirejs',
@@ -209,15 +209,26 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.mkdir(this.env.options.appPath + '/scripts/vendor/');
   this.mkdir(this.env.options.appPath + '/styles');
   this.mkdir(this.env.options.appPath + '/images');
+  this.mkdir(this.env.options.appPath + '/styles/fonts');
   this.copy('app/404.html', this.env.options.appPath + '/404.html');
   this.copy('app/favicon.ico', this.env.options.appPath + '/favicon.ico');
   this.copy('app/robots.txt', this.env.options.appPath + '/robots.txt');
   this.copy('app/htaccess', this.env.options.appPath + '/.htaccess');
-  this.copy('app/scripts/lib/.', this.env.options.appPath + '/scripts/lib/.');
-  this.copy('app/scripts/locale/.', this.env.options.appPath + '/scripts/locale/.');
-  this.copy('app/scripts/locale/.', this.env.options.appPath + '/scripts/locale/.');
-  this.copy('app/scripts/models/.', this.env.options.appPath + '/scripts/models/.');
-  this.copy('app/scripts/views/.', this.env.options.appPath + '/scripts/views/.');
+  this.copy('app/scripts/lib/backbone-app.coffee', this.env.options.appPath + '/scripts/lib/backbone-app.coffee');
+  this.copy('app/scripts/lib/backbone-locale.coffee', this.env.options.appPath + '/scripts/lib/backbone-locale.coffee');
+  this.copy('app/scripts/lib/backbone-system.coffee', this.env.options.appPath + '/scripts/lib/backbone-system.coffee');
+  this.copy('app/scripts/lib/lorem/lorem.js', this.env.options.appPath + '/scripts/lib/lorem/lorem.js');
+  this.copy('app/scripts/locale/lorem.js', this.env.options.appPath + '/scripts/locale/lorem.js');
+  this.copy('app/scripts/locale/lorem.starwars.js', this.env.options.appPath + '/scripts/locale/lorem.starwars.js');
+  this.copy('app/scripts/locale/lorem.futurama.js', this.env.options.appPath + '/scripts/locale/lorem.futurama.js');
+  this.copy('app/scripts/locale/strings-en.coffee', this.env.options.appPath + '/scripts/locale/strings-en.coffee');
+  this.copy('app/scripts/locale/strings-es.coffee', this.env.options.appPath + '/scripts/locale/strings-es.coffee');
+  this.copy('app/scripts/models/backbone.sync.js', this.env.options.appPath + '/scripts/models/backbone.sync.js');
+  this.copy('app/scripts/views/element_view.js.coffee', this.env.options.appPath + '/scripts/views/element_view.js.coffee');
+  this.copy('app/scripts/views/d3_view.js.coffee', this.env.options.appPath + '/scripts/views/element_view.js.coffee');
+  this.copy('app/scripts/views/collection_view.js.coffee', this.env.options.appPath + '/scripts/views/collection_view.js.coffee');
+  this.copy('app/styles/main.scss', this.env.options.appPath + '/styles/main.scss');
+  this.template('app/scripts/router.coffee', this.env.options.appPath + '/scripts/router.coffee');
   this.write(this.env.options.appPath + '/index.html', this.indexFile);
 };
 
