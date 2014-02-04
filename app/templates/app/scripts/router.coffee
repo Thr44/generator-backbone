@@ -21,13 +21,12 @@ class <%= _.camelize(appname) %>.Router extends Backbone.Router
     do @before_any
     console.log "I'm starting up...."
 
-  #guaranteeing that whichever route, this will run once:
-  before_any: ->
-    @once ||= _.once @composeLayout
-    do @once
+  before_any: =>
+    @doOnce||=_.once @composeLayout
+    do @doOnce
 
-  composeLayout: ->
-    log "set anything for composing layout here!"
+  composeLayout:()=>
+    log "!!!!!!!!!!!!set anything for composing layout here!"
     
 
     
