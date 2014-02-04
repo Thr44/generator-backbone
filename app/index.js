@@ -183,8 +183,17 @@ Generator.prototype.writeIndex = function writeIndex() {
     searchPath: ['.tmp', this.env.options.appPath],
     optimizedPath: 'scripts/main.js',
     sourceFileList: [
+      'scripts/lib/backbone-app.js',
+      'scripts/lib/backbone-system.js',
+      'scripts/lib/backbone-locale.js',
+      'scripts/models/backbone.sync.js',
+      'scripts/views/element_view.js',
+      'scripts/views/collection_view.js',
+      'scripts/views/d3_view.js',
+      'scripts/router.js',
       'scripts/main.js',
       'scripts/templates.js'
+      
     ]
   });
 };
