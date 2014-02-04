@@ -9,13 +9,13 @@
     "mvc",
     "backbone"
   ],
-  "homepage": "https://github.com/yeoman/generator-backbone",
-  "bugs": "https://github.com/yeoman/generator-backbone/issues",
-  "author": "The Yeoman Team",
+  "homepage": "https://github.com/Thr44/generator-bestiario",
+  "bugs": "https://github.com/Thr44/generator-bestiario/issues",
+  "author": "Bestiario, addapting from The Yeoman Team",
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/yeoman/generator-backbone.git"
+    "url": "git://github.com/Thr44/generator-bestiario.git"
   },
   "scripts": {
     "test": "mocha --reporter spec"
