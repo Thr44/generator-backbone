@@ -12,7 +12,7 @@ function Generator() {
   this.sourceRoot(path.join(__dirname, dirPath));
 
   var testOptions = {
-    as: 'element-view',
+    as: 'view',
     args: [this.name],
     options: {
       coffee: this.config.get('coffee'),
