@@ -247,7 +247,7 @@ Generator.prototype.mainJs = function mainJs() {
     return;
   }
   this.writeTemplate('main', this.env.options.appPath + '/scripts/main');
-  this.template('app/scripts/router.coffee', this.env.options.appPath + '/scripts/router.coffee');
+  this.template('router.coffee', this.env.options.appPath + '/scripts/router.coffee');
   
 };
 
@@ -256,6 +256,6 @@ Generator.prototype.createAppFile = function createAppFile() {
     return;
   }
   this.writeTemplate('app', this.env.options.appPath + '/scripts/main');
-  this.template('app/scripts/router.coffee', this.env.options.appPath + '/scripts/router.coffee');
+  this.template('router.coffee', this.env.options.appPath + '/scripts/router.coffee');
   
 };
