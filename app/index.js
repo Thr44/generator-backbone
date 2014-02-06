@@ -239,7 +239,6 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.copy('app/scripts/views/collection_view.js.coffee', this.env.options.appPath + '/scripts/views/collection_view.js.coffee');
   this.copy('app/styles/_media_queries.scss', this.env.options.appPath + '/styles/_media_queries.scss');
   this.copy('app/styles/_variables.scss', this.env.options.appPath + '/styles/_variables.scss');
-  this.template('app/scripts/router.coffee', this.env.options.appPath + '/scripts/router.coffee');
   this.write(this.env.options.appPath + '/index.html', this.indexFile);
 };
 
@@ -248,6 +247,8 @@ Generator.prototype.mainJs = function mainJs() {
     return;
   }
   this.writeTemplate('main', this.env.options.appPath + '/scripts/main');
+  this.template('app/scripts/router.coffee', this.env.options.appPath + '/scripts/router.coffee');
+  
 };
 
 Generator.prototype.createAppFile = function createAppFile() {
@@ -255,4 +256,6 @@ Generator.prototype.createAppFile = function createAppFile() {
     return;
   }
   this.writeTemplate('app', this.env.options.appPath + '/scripts/main');
+  this.template('app/scripts/router.coffee', this.env.options.appPath + '/scripts/router.coffee');
+  
 };

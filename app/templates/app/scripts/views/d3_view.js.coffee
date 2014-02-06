@@ -1,7 +1,5 @@
 class Backbone.d3View extends Backbone.ElementView
 
-  template: JST['app/scripts/templates/projectElement.hbs']
-
   init: ->
 
   modelDidChange:->
