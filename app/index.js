@@ -214,6 +214,9 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.mkdir(this.env.options.appPath);
   this.mkdir(this.env.options.appPath + '/scripts');
   this.mkdir(this.env.options.appPath + '/scripts/vendor/');
+  this.mkdir(this.env.options.appPath + '/scripts/collections/');
+  this.mkdir(this.env.options.appPath + '/scripts/views/');
+  this.mkdir(this.env.options.appPath + '/scripts/models/');
   this.mkdir(this.env.options.appPath + '/styles');
   this.mkdir(this.env.options.appPath + '/images');
   this.mkdir(this.env.options.appPath + '/styles/fonts');
