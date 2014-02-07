@@ -2,7 +2,6 @@ class <%= _.camelize(appname) %>.Router extends Backbone.Router
 
   appViews:{}
   dataModels:{}
-  enablePortrait: false
 
   routes:
     "example": 'example'
