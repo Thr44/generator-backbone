@@ -151,6 +151,7 @@ Generator.prototype.writeIndex = function writeIndex() {
 
   var vendorJS = [
     'bower_components/jquery/dist/jquery.js',
+    'bower_components/yepnope/yepnope.js',
     'bower_components/underscore/underscore.js',
     'bower_components/backbone/backbone.js'
   ];
@@ -192,8 +193,8 @@ Generator.prototype.writeIndex = function writeIndex() {
       'scripts/views/element_view.js',
       'scripts/views/collection_view.js',
       'scripts/views/d3_view.js',
-      'scripts/router.js',
       'scripts/main.js',
+      'scripts/router.js',
       'scripts/templates.js'
       
     ]
@@ -249,7 +250,7 @@ Generator.prototype.mainJs = function mainJs() {
     return;
   }
   this.writeTemplate('main', this.env.options.appPath + '/scripts/main');
-  this.template('router.coffee', this.env.options.appPath + '/scripts/router.coffee');
+  this.writeTemplate('router', this.env.options.appPath + '/scripts/router');
   
 };
 
@@ -258,6 +259,6 @@ Generator.prototype.createAppFile = function createAppFile() {
     return;
   }
   this.writeTemplate('app', this.env.options.appPath + '/scripts/main');
-  this.template('router.coffee', this.env.options.appPath + '/scripts/router.coffee');
+  this.writeTemplate('router', this.env.options.appPath + '/scripts/router');
   
 };
