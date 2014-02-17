@@ -186,9 +186,9 @@ module.exports = function (grunt) {
                     // rather than compiling multiple files here you should
                     // require them into your main .coffee file
                     expand: true,
-                    cwd: '<%= yeoman.app %>/scripts/locale',
+                    cwd: '<%%= yeoman.app %>/scripts/locale',
                     src: '{,*/}*.coffee',
-                    dest: '<%= yeoman.dist %>/scripts/locale',
+                    dest: '<%%= yeoman.app %>/scripts/locale',
                     ext: '.js'
                 }]
             },
@@ -316,8 +316,8 @@ module.exports = function (grunt) {
                         '*.{ico,txt}',
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
-                        'scripts/locale/{,*/}*.{js}',
-                        'scripts/vendor/{,*/}*.js',
+                        'scripts/locale/**',
+                        'scripts/vendor/**',
                         'styles/fonts/{,*/}*.*',<% if (compassBootstrap) { %>
                         'bower_components/sass-bootstrap/fonts/*.*'<% } %>
                     ]
