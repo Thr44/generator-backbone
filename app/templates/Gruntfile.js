@@ -22,7 +22,7 @@ module.exports = function (grunt) {
     // configurable paths
     var yeomanConfig = {
         app: '<%= env.options.appPath %>',
-        dist: 'dist'
+        dist: 'www'
     };
 
     grunt.initConfig({
@@ -33,7 +33,10 @@ module.exports = function (grunt) {
                 livereload: true
             },<% if (options.coffee) { %>
             coffee: {
-                files: ['<%%= yeoman.app %>/scripts/{,*/}*.coffee'],
+                files: [
+                    '<%%= yeoman.app %>/scripts/{,*/}*.coffee',
+                    '<%%= yeoman.app %>/scripts/locale/{,*/}*.coffee'
+                ],
                 tasks: ['coffee:dist']
             },
             coffeeTest: {
@@ -52,6 +55,7 @@ module.exports = function (grunt) {
                     '<%%= yeoman.app %>/*.html',
                     '{.tmp,<%%= yeoman.app %>}/styles/{,*/}*.css',
                     '{.tmp,<%%= yeoman.app %>}/scripts/{,*/}*.js',
+                    '{.tmp,<%= yeoman.app %>}/scripts/locale/{,*/}*.js',
                     '<%%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                     '<%%= yeoman.app %>/scripts/templates/*.{ejs,mustache,hbs}',
                     'test/spec/**/*.js'
@@ -140,7 +144,8 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 '<%%= yeoman.app %>/scripts/{,*/}*.js',
-                '!<%%= yeoman.app %>/scripts/vendor/*',
+                '<%%= yeoman.app %>/scripts/locale/{,*/}*.js',
+                '!<%%= yeoman.app %>/scripts/vendor/{,*/}*.js',
                 'test/spec/{,*/}*.js'
             ]
         }<% if (testFramework === 'mocha') { %>,
@@ -176,6 +181,14 @@ module.exports = function (grunt) {
                     cwd: '<%%= yeoman.app %>/scripts',
                     src: '{,*/}*.coffee',
                     dest: '.tmp/scripts',
+                    ext: '.js'
+                }, {
+                    // rather than compiling multiple files here you should
+                    // require them into your main .coffee file
+                    expand: true,
+                    cwd: '<%= yeoman.app %>/scripts/locale',
+                    src: '{,*/}*.coffee',
+                    dest: '<%= yeoman.dist %>/scripts/locale',
                     ext: '.js'
                 }]
             },
@@ -303,6 +316,8 @@ module.exports = function (grunt) {
                         '*.{ico,txt}',
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
+                        'scripts/locale/{,*/}*.{js}',
+                        'scripts/vendor/{,*/}*.js',
                         'styles/fonts/{,*/}*.*',<% if (compassBootstrap) { %>
                         'bower_components/sass-bootstrap/fonts/*.*'<% } %>
                     ]
@@ -351,7 +366,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
-                        '<%%= yeoman.dist %>/scripts/{,*/}*.js',
+                        '<%= yeoman.dist %>/scripts/{,^((?!locale).)*$/}*.js',
                         '<%%= yeoman.dist %>/styles/{,*/}*.css',
                         '<%%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                         '<%= yeoman.dist %>/styles/fonts/{,*/}*.*',<% if (compassBootstrap) { %>

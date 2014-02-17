@@ -1,0 +1,303 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/Cellar/node/0.10.21/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@1.3.11
+3 info using node@v0.10.21
+4 verbose publish [ '.' ]
+5 verbose cache add [ '.', null ]
+6 verbose cache add name=undefined spec="." args=[".",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: '.',
+7 verbose parsed url   path: '.',
+7 verbose parsed url   href: '.' }
+8 silly lockFile 3a52ce78- .
+9 verbose lock . /Users/thr44/.npm/3a52ce78-.lock
+10 verbose tar pack [ '/var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz',
+10 verbose tar pack   '.' ]
+11 verbose tarball /var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+12 verbose folder .
+13 silly lockFile 1f1177db-tar tar://.
+14 verbose lock tar://. /Users/thr44/.npm/1f1177db-tar.lock
+15 silly lockFile 63f65625-30698-0-7759395951870829-tmp-tgz tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+16 verbose lock tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz /Users/thr44/.npm/63f65625-30698-0-7759395951870829-tmp-tgz.lock
+17 silly lockFile 1f1177db-tar tar://.
+18 silly lockFile 1f1177db-tar tar://.
+19 silly lockFile 63f65625-30698-0-7759395951870829-tmp-tgz tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+20 silly lockFile 63f65625-30698-0-7759395951870829-tmp-tgz tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+21 verbose tar unpack /var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+22 silly lockFile 316abd07-30698-0-7759395951870829-package tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package
+23 verbose lock tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package /Users/thr44/.npm/316abd07-30698-0-7759395951870829-package.lock
+24 silly lockFile 63f65625-30698-0-7759395951870829-tmp-tgz tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+25 verbose lock tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz /Users/thr44/.npm/63f65625-30698-0-7759395951870829-tmp-tgz.lock
+26 silly gunzTarPerm modes [ '755', '644' ]
+27 silly gunzTarPerm extractEntry package.json
+28 silly gunzTarPerm extractEntry script-base.js
+29 silly gunzTarPerm extractEntry util.js
+30 silly gunzTarPerm extractEntry all/index.js
+31 silly gunzTarPerm extractEntry d3-view/index.js
+32 silly gunzTarPerm extractEntry element-view/index.js
+33 silly gunzTarPerm extractEntry model/index.js
+34 silly gunzTarPerm extractEntry app/index.js
+35 silly gunzTarPerm extractEntry app/templates/Gruntfile.js
+36 silly gunzTarPerm extractEntry app/templates/main.scss
+37 silly gunzTarPerm extractEntry app/templates/_package.json
+38 silly gunzTarPerm extractEntry app/templates/app/404.html
+39 silly gunzTarPerm extractEntry app/templates/app/favicon.ico
+40 silly gunzTarPerm extractEntry app/templates/app/htaccess
+41 silly gunzTarPerm extractEntry app/templates/app/robots.txt
+42 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/backbone-app.coffee
+43 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/backbone-locale.coffee
+44 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/backbone-system.coffee
+45 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/lorem/lorem.js
+46 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/lorem.futurama.js
+47 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/lorem.js
+48 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/lorem.starwars.js
+49 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-en.js
+50 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-es.js
+51 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-en.coffee
+52 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-es.coffee
+53 silly gunzTarPerm extractEntry app/templates/app/scripts/models/backbone.sync.js
+54 silly gunzTarPerm extractEntry app/templates/app/scripts/router.coffee
+55 silly gunzTarPerm extractEntry app/templates/app/scripts/views/collection_view.js.coffee
+56 silly gunzTarPerm extractEntry app/templates/app/scripts/views/d3_view.js.coffee
+57 silly gunzTarPerm extractEntry app/templates/app/scripts/views/element_view.js.coffee
+58 silly gunzTarPerm extractEntry app/templates/app/styles/_media_queries.scss
+59 silly gunzTarPerm extractEntry app/templates/app/styles/_variables.scss
+60 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-Bold.otf
+61 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-BoldItalic.otf
+62 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-Italic.otf
+63 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-Regular.otf
+64 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans-Bold.otf
+65 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans-BoldItalic.otf
+66 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans-Italic.otf
+67 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans.otf
+68 silly gunzTarPerm extractEntry app/templates/app/styles/main.css
+69 silly gunzTarPerm extractEntry app/templates/bowerrc
+70 silly gunzTarPerm extractEntry app/templates/_bower.json
+71 silly gunzTarPerm extractEntry app/templates/gitattributes
+72 silly gunzTarPerm extractEntry app/templates/gitignore
+73 silly gunzTarPerm extractEntry app/templates/index.html
+74 silly gunzTarPerm extractEntry app/templates/jshintrc
+75 silly gunzTarPerm extractEntry app/templates/editorconfig
+76 silly gunzTarPerm extractEntry view/index.js
+77 silly gunzTarPerm extractEntry readme.md
+78 silly gunzTarPerm extractEntry router/index.js
+79 silly gunzTarPerm extractEntry collection/index.js
+80 silly gunzTarPerm extractEntry templates/app.js
+81 silly gunzTarPerm extractEntry templates/collection-view.js
+82 silly gunzTarPerm extractEntry templates/collection.js
+83 silly gunzTarPerm extractEntry templates/d3-view.js
+84 silly gunzTarPerm extractEntry templates/router.js
+85 silly gunzTarPerm extractEntry templates/model.js
+86 silly gunzTarPerm extractEntry templates/view.js
+87 silly gunzTarPerm extractEntry templates/element-view.js
+88 silly gunzTarPerm extractEntry templates/requirejs/collection-view.js
+89 silly gunzTarPerm extractEntry templates/requirejs/collection.js
+90 silly gunzTarPerm extractEntry templates/requirejs/d3-view.js
+91 silly gunzTarPerm extractEntry templates/requirejs/element-view.js
+92 silly gunzTarPerm extractEntry templates/requirejs/main.js
+93 silly gunzTarPerm extractEntry templates/requirejs/model.js
+94 silly gunzTarPerm extractEntry templates/requirejs/router.js
+95 silly gunzTarPerm extractEntry templates/requirejs/view.js
+96 silly gunzTarPerm extractEntry templates/coffeescript/app.coffee
+97 silly gunzTarPerm extractEntry templates/coffeescript/collection-view.coffee
+98 silly gunzTarPerm extractEntry templates/coffeescript/collection.coffee
+99 silly gunzTarPerm extractEntry templates/coffeescript/d3-view.coffee
+100 silly gunzTarPerm extractEntry templates/coffeescript/element-view.coffee
+101 silly gunzTarPerm extractEntry templates/coffeescript/model.coffee
+102 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/collection-view.coffee
+103 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/collection.coffee
+104 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/d3-view.coffee
+105 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/element-view.coffee
+106 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/main.coffee
+107 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/model.coffee
+108 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/router.coffee
+109 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/view.coffee
+110 silly gunzTarPerm extractEntry templates/coffeescript/router.coffee
+111 silly gunzTarPerm extractEntry templates/coffeescript/view.coffee
+112 silly gunzTarPerm extractEntry templates/coffeescript/view.ejs
+113 silly gunzTarPerm extractEntry templates/view.ejs
+114 silly gunzTarPerm extractEntry collection-view/index.js
+115 silly lockFile 316abd07-30698-0-7759395951870829-package tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package
+116 silly lockFile 316abd07-30698-0-7759395951870829-package tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package
+117 silly lockFile 63f65625-30698-0-7759395951870829-tmp-tgz tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+118 silly lockFile 63f65625-30698-0-7759395951870829-tmp-tgz tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/tmp.tgz
+119 verbose tar pack [ '/Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz',
+119 verbose tar pack   '/var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package' ]
+120 verbose tarball /Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+121 verbose folder /var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package
+122 silly lockFile 316abd07-30698-0-7759395951870829-package tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package
+123 verbose lock tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package /Users/thr44/.npm/316abd07-30698-0-7759395951870829-package.lock
+124 silly lockFile 58250ba4-tor-bestiario-0-0-11-package-tgz tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+125 verbose lock tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz /Users/thr44/.npm/58250ba4-tor-bestiario-0-0-11-package-tgz.lock
+126 silly lockFile 316abd07-30698-0-7759395951870829-package tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package
+127 silly lockFile 316abd07-30698-0-7759395951870829-package tar:///var/folders/h2/412fkwd95p7gbcc0394htbvh0000gn/T/npm-65807-iQmb6IwY/1392636230698-0.7759395951870829/package
+128 silly lockFile 58250ba4-tor-bestiario-0-0-11-package-tgz tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+129 silly lockFile 58250ba4-tor-bestiario-0-0-11-package-tgz tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+130 silly lockFile e01bc911-nerator-bestiario-0-0-11-package /Users/thr44/.npm/generator-bestiario/0.0.11/package
+131 verbose lock /Users/thr44/.npm/generator-bestiario/0.0.11/package /Users/thr44/.npm/e01bc911-nerator-bestiario-0-0-11-package.lock
+132 silly lockFile e01bc911-nerator-bestiario-0-0-11-package /Users/thr44/.npm/generator-bestiario/0.0.11/package
+133 silly lockFile e01bc911-nerator-bestiario-0-0-11-package /Users/thr44/.npm/generator-bestiario/0.0.11/package
+134 verbose tar unpack /Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+135 silly lockFile b3ab4bbe-nerator-bestiario-0-0-11-package tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package
+136 verbose lock tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package /Users/thr44/.npm/b3ab4bbe-nerator-bestiario-0-0-11-package.lock
+137 silly lockFile 58250ba4-tor-bestiario-0-0-11-package-tgz tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+138 verbose lock tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz /Users/thr44/.npm/58250ba4-tor-bestiario-0-0-11-package-tgz.lock
+139 silly gunzTarPerm modes [ '755', '644' ]
+140 silly gunzTarPerm extractEntry package.json
+141 silly gunzTarPerm extractEntry script-base.js
+142 silly gunzTarPerm extractEntry util.js
+143 silly gunzTarPerm extractEntry collection-view/index.js
+144 silly gunzTarPerm extractEntry d3-view/index.js
+145 silly gunzTarPerm extractEntry element-view/index.js
+146 silly gunzTarPerm extractEntry model/index.js
+147 silly gunzTarPerm extractEntry app/index.js
+148 silly gunzTarPerm extractEntry app/templates/Gruntfile.js
+149 silly gunzTarPerm extractEntry app/templates/main.scss
+150 silly gunzTarPerm extractEntry app/templates/_package.json
+151 silly gunzTarPerm extractEntry app/templates/app/404.html
+152 silly gunzTarPerm extractEntry app/templates/app/favicon.ico
+153 silly gunzTarPerm extractEntry app/templates/app/htaccess
+154 silly gunzTarPerm extractEntry app/templates/app/robots.txt
+155 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/backbone-app.coffee
+156 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/backbone-locale.coffee
+157 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/backbone-system.coffee
+158 silly gunzTarPerm extractEntry app/templates/app/scripts/lib/lorem/lorem.js
+159 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/lorem.futurama.js
+160 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/lorem.js
+161 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/lorem.starwars.js
+162 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-en.js
+163 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-es.js
+164 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-en.coffee
+165 silly gunzTarPerm extractEntry app/templates/app/scripts/locale/strings-es.coffee
+166 silly gunzTarPerm extractEntry app/templates/app/scripts/models/backbone.sync.js
+167 silly gunzTarPerm extractEntry app/templates/app/scripts/router.coffee
+168 silly gunzTarPerm extractEntry app/templates/app/scripts/views/collection_view.js.coffee
+169 silly gunzTarPerm extractEntry app/templates/app/scripts/views/d3_view.js.coffee
+170 silly gunzTarPerm extractEntry app/templates/app/scripts/views/element_view.js.coffee
+171 silly gunzTarPerm extractEntry app/templates/app/styles/_media_queries.scss
+172 silly gunzTarPerm extractEntry app/templates/app/styles/_variables.scss
+173 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-Bold.otf
+174 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-BoldItalic.otf
+175 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-Italic.otf
+176 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/Asap-Regular.otf
+177 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans-Bold.otf
+178 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans-BoldItalic.otf
+179 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans-Italic.otf
+180 silly gunzTarPerm extractEntry app/templates/app/styles/fonts/NeoSans.otf
+181 silly gunzTarPerm extractEntry app/templates/app/styles/main.css
+182 silly gunzTarPerm extractEntry app/templates/bowerrc
+183 silly gunzTarPerm extractEntry app/templates/_bower.json
+184 silly gunzTarPerm extractEntry app/templates/gitattributes
+185 silly gunzTarPerm extractEntry app/templates/gitignore
+186 silly gunzTarPerm extractEntry app/templates/index.html
+187 silly gunzTarPerm extractEntry app/templates/jshintrc
+188 silly gunzTarPerm extractEntry app/templates/editorconfig
+189 silly gunzTarPerm extractEntry readme.md
+190 silly gunzTarPerm extractEntry router/index.js
+191 silly gunzTarPerm extractEntry all/index.js
+192 silly gunzTarPerm extractEntry templates/app.js
+193 silly gunzTarPerm extractEntry templates/collection-view.js
+194 silly gunzTarPerm extractEntry templates/collection.js
+195 silly gunzTarPerm extractEntry templates/d3-view.js
+196 silly gunzTarPerm extractEntry templates/router.js
+197 silly gunzTarPerm extractEntry templates/model.js
+198 silly gunzTarPerm extractEntry templates/view.js
+199 silly gunzTarPerm extractEntry templates/element-view.js
+200 silly gunzTarPerm extractEntry templates/requirejs/collection-view.js
+201 silly gunzTarPerm extractEntry templates/requirejs/collection.js
+202 silly gunzTarPerm extractEntry templates/requirejs/d3-view.js
+203 silly gunzTarPerm extractEntry templates/requirejs/element-view.js
+204 silly gunzTarPerm extractEntry templates/requirejs/main.js
+205 silly gunzTarPerm extractEntry templates/requirejs/model.js
+206 silly gunzTarPerm extractEntry templates/requirejs/router.js
+207 silly gunzTarPerm extractEntry templates/requirejs/view.js
+208 silly gunzTarPerm extractEntry templates/coffeescript/app.coffee
+209 silly gunzTarPerm extractEntry templates/coffeescript/collection-view.coffee
+210 silly gunzTarPerm extractEntry templates/coffeescript/collection.coffee
+211 silly gunzTarPerm extractEntry templates/coffeescript/d3-view.coffee
+212 silly gunzTarPerm extractEntry templates/coffeescript/element-view.coffee
+213 silly gunzTarPerm extractEntry templates/coffeescript/model.coffee
+214 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/collection-view.coffee
+215 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/collection.coffee
+216 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/d3-view.coffee
+217 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/element-view.coffee
+218 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/main.coffee
+219 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/model.coffee
+220 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/router.coffee
+221 silly gunzTarPerm extractEntry templates/coffeescript/requirejs/view.coffee
+222 silly gunzTarPerm extractEntry templates/coffeescript/router.coffee
+223 silly gunzTarPerm extractEntry templates/coffeescript/view.coffee
+224 silly gunzTarPerm extractEntry templates/coffeescript/view.ejs
+225 silly gunzTarPerm extractEntry templates/view.ejs
+226 silly gunzTarPerm extractEntry collection/index.js
+227 silly gunzTarPerm extractEntry view/index.js
+228 silly lockFile b3ab4bbe-nerator-bestiario-0-0-11-package tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package
+229 silly lockFile b3ab4bbe-nerator-bestiario-0-0-11-package tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package
+230 silly lockFile 58250ba4-tor-bestiario-0-0-11-package-tgz tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+231 silly lockFile 58250ba4-tor-bestiario-0-0-11-package-tgz tar:///Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz
+232 verbose chmod /Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz 644
+233 verbose chown /Users/thr44/.npm/generator-bestiario/0.0.11/package.tgz [ 501, 20 ]
+234 silly lockFile 3a52ce78- .
+235 silly lockFile 3a52ce78- .
+236 silly publish { name: 'generator-bestiario',
+236 silly publish   version: '0.0.11',
+236 silly publish   description: 'A generator for Backbone.js adapted from yeoman-generator',
+236 silly publish   keywords: [ 'yeoman-generator', 'scaffold', 'framework', 'mvc', 'backbone' ],
+236 silly publish   homepage: 'https://github.com/Thr44/generator-bestiario',
+236 silly publish   bugs: { url: 'https://github.com/Thr44/generator-bestiario/issues' },
+236 silly publish   author: { name: 'Bestiario, addapting from The Yeoman Team' },
+236 silly publish   main: 'app/index.js',
+236 silly publish   repository:
+236 silly publish    { type: 'git',
+236 silly publish      url: 'git://github.com/Thr44/generator-bestiario.git' },
+236 silly publish   scripts: { test: 'mocha --reporter spec' },
+236 silly publish   dependencies: { 'yeoman-generator': '~0.16.0' },
+236 silly publish   peerDependencies:
+236 silly publish    { 'generator-mocha': '>=0.1.1',
+236 silly publish      'generator-backbone-mocha': '>=0.0.2',
+236 silly publish      yo: '>=1.0.0' },
+236 silly publish   devDependencies: { mocha: '*' },
+236 silly publish   engines: { node: '>=0.10.0', npm: '>=1.2.10' },
+236 silly publish   licenses: [ { type: 'BSD' } ],
+236 silly publish   readme: '# B generator\n\nMaintainer: [Miguel Cardoso](https://github.com/Thr44)\n\nA Backbone generator forked from Revath S Kumar https://github.com/yeoman/generator-backbone, with some extra components originally developed by http://www.aerstudio.com/ and extended by thr44\n\nby default it uses Handlebars framework\n\nRather use backbone-generator from Yeoman Team!!\n\n\n\n\n## Usage\n\nInstall: `sudo npm install -g generator-bestiario`\n\nMake a new directory and `cd` into it:\n```\nmkdir my-new-project && cd $_\n```\n\nRun `yo bestiario`, optionally passing an app name:\n```\nyo bestiario [app-name]\n```\n\n\n## Generators\n\nAvailable generators:\n\n- bestiario:model\n- bestiario:view\n- bestiario:element-view\n- bestiario:d3-view\n- bestiario:collection-view\n- bestiario:view\n- bestiario:collection\n- bestiario:router\n- bestiario:all\n\n## Typical workflow\n\n```\nyo bestiario # generates your application base and build workflow\nyo bestiario:model blog\nyo bestiario:collection blog\nyo bestiario:router blog\nyo bestiario:view blog\nyo bestiario:element-view blog\nyo bestiario:d3-view blog\nyo bestiario:collection-view blog\ngrunt serve\n```\n\n\n## License\n\n[BSD license](http://opensource.org/licenses/bsd-license.php)\n',
+236 silly publish   readmeFilename: 'readme.md',
+236 silly publish   _id: 'generator-bestiario@0.0.11',
+236 silly publish   dist: { shasum: 'ad44e70e2c958c4d06d65d5549b88343380f2248' },
+236 silly publish   _from: '.' }
+237 verbose url raw generator-bestiario
+238 verbose url resolving [ 'https://registry.npmjs.org/', './generator-bestiario' ]
+239 verbose url resolved https://registry.npmjs.org/generator-bestiario
+240 info trying registry request attempt 1 at 11:23:51
+241 http PUT https://registry.npmjs.org/generator-bestiario
+242 http 409 https://registry.npmjs.org/generator-bestiario
+243 verbose url raw generator-bestiario
+244 verbose url resolving [ 'https://registry.npmjs.org/', './generator-bestiario' ]
+245 verbose url resolved https://registry.npmjs.org/generator-bestiario
+246 info trying registry request attempt 1 at 11:23:52
+247 http GET https://registry.npmjs.org/generator-bestiario
+248 http 200 https://registry.npmjs.org/generator-bestiario
+249 error publish fail Cannot publish over existing version.
+249 error publish fail Update the 'version' field in package.json and try again.
+249 error publish fail
+249 error publish fail If the previous version was published in error, see:
+249 error publish fail     npm help unpublish
+249 error publish fail
+249 error publish fail To automatically increment version numbers, see:
+249 error publish fail     npm help version
+250 error System Darwin 13.0.2
+251 error command "/usr/local/Cellar/node/0.10.21/bin/node" "/usr/local/bin/npm" "publish"
+252 error cwd /Users/thr44/Documents/bestiarioJS/generator-bestiario
+253 error node -v v0.10.21
+254 error npm -v 1.3.11
+255 error code EPUBLISHCONFLICT
+256 verbose exit [ 1, true ]
