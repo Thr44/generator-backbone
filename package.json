@@ -1,6 +1,6 @@
 {
   "name": "generator-bestiario",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "description": "A generator for Backbone.js adapted from yeoman-generator",
   "keywords": [
     "yeoman-generator",

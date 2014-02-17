@@ -38,7 +38,7 @@ class Backbone.Locale
       do cb
       return
     
-    url = "scripts/locale/strings-#{lang}.js" unless url?
+    url = window.rootPath+"scripts/locale/strings-#{lang}.js" unless url?
     if url?
       if typeof yepnope is 'function'
         yepnope([{
@@ -107,7 +107,7 @@ class Backbone.Locale
     return false if location.hostname.split('.').slice(-1).toString() isnt 'dev' and not opts.options and not opts.options.forceLorem
     dicts = ['lorem.js', 'lorem.starwars.js']
     dicts = for file in dicts
-      "scripts/locale/#{file}" 
+      window.rootPath+"scripts/locale/#{file}" 
     #"#{@options.asset_path}lib/lorem/#{file}"
     @loadingDicts = true
     yepnope(

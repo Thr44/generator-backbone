@@ -61,7 +61,10 @@ if not Backbone?
   throw new Error "Backbone should be installed"
 
 Backbone.App = (config)->
+  config.rootPath||="/"
+  window.rootPath=config.rootPath
   conf = config or {}
+  conf.root=conf.rootPath
 
   if not conf.namespace?
     conf.namespace = {}
@@ -89,7 +92,7 @@ Backbone.App = (config)->
   
   localeUrl = (lang)->
     if not conf.localeUrl?
-      url = "scripts/locale/strings-#{lang}.js"
+      url = conf.rootPath+"scripts/locale/strings-#{lang}.js"
     else 
       if not _.isFunction conf.localeUrl
         url  = conf.localeUrl
