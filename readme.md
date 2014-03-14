@@ -1,5 +1,6 @@
 # B generator
 
+
 Maintainer: [Miguel Cardoso](https://github.com/Thr44)
 
 A Backbone generator forked from Revath S Kumar https://github.com/yeoman/generator-backbone, with some extra components originally developed by http://www.aerstudio.com/ and extended by thr44

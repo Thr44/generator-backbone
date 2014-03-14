@@ -156,7 +156,6 @@ Backbone.App = (config)->
       logger = ()->
         return null
 
-
   locale = null
   baseApp = 
     Models: {}
