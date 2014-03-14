@@ -1,3 +1,17 @@
+### 
+to load data, use a collection or model and extend the parse method!
+example: (requires d3!)
+
+  parse:(data, xhr)=>
+    rawData=d3.csv.parse(data)
+    source = []
+    for rawItem in rawData
+      item = new @model rawItem
+      source.push(item)
+    return source
+
+###
+
 class Backbone.d3View extends Backbone.ElementView
 
   init: ->

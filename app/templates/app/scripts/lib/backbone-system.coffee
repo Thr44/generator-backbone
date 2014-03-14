@@ -89,7 +89,7 @@ class Backbone.System
         return parseInt(version)
     null
 
-  @OS: () ->
+  @os: () ->
     ua = navigator.userAgent;
     return @OS.Android if /Android/.test(ua)
     return @OS.ChromeOS if /CrOS/.test(ua)

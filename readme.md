@@ -6,7 +6,6 @@ A Backbone generator forked from Revath S Kumar https://github.com/yeoman/genera
 
 by default it uses Handlebars framework
 
-Rather use backbone-generator from Yeoman Team!!
 
 
 
@@ -24,6 +23,25 @@ Run `yo bestiario`, optionally passing an app name:
 ```
 yo bestiario [app-name]
 ```
+
+## Backbone App
+
+Available functions:
+
+  - Backbone.System.orientation()
+  - Backbone.System.isOnline()
+  - Backbone.System.isIpad()
+  - Backbone.System.browser()
+  - Backbone.System.browserVersion:()
+  - Backbone.System.os()
+  - Backbone.System.supportCanvas()
+  - Backbone.System.supportLocalStorage()
+  - Backbone.System.supportFile()
+  - Backbone.System.supportFileSystem()
+  - Backbone.System.supportRequestAnimationFrame()
+  - Backbone.System.supportSessionStorage()
+  - Backbone.System.supportWebgl()
+  - Backbone.System.supportWorker()
 
 
 ## Generators

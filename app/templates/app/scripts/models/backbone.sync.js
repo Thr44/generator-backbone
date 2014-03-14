@@ -9,6 +9,7 @@ fo support for xml files see: line 41
 
 */
 
+
 var methodMap = {
   'create': 'POST',
   'update': 'PUT',
@@ -36,16 +37,6 @@ Backbone.sync = function(method, model, options) {
   if (!options.xhrFields) {
     options.xhrFields = {withCredentials:true};
   }
-  */
-
-  //uncomment for xml support
-  //@author: Miguel Cardoso
-  /*
-  options = _.extend(options,
-    dataType: 'xml'
-    contentType: 'application/xml'
-    processData: false
-  )
   */
 
   // Default JSON-request options.

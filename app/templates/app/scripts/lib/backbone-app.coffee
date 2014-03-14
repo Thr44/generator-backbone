@@ -150,7 +150,11 @@ Backbone.App = (config)->
   if window.log?
     logger = window.log
   else
-    logger = -> console.log.apply(console, arguments)
+    if console? and console.log?
+      logger = -> console.log.apply(console, arguments)
+    else
+      logger = ()->
+        return null
 
 
   locale = null
