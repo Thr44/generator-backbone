@@ -1,7 +1,7 @@
 'use strict';
 
 
-class <%= _.camelize(appname) %>.Routers.<%= _.classify(name) %> extends Backbone.Router
+class <%= _.camelize(appname) %>.Router extends Backbone.Router
 
 
   appViews:{}
