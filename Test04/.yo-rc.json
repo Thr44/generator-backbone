@@ -1,0 +1,11 @@
+{
+  "generator-bestiario": {
+    "appPath": "app",
+    "appName": "ATT",
+    "coffee": true,
+    "testFramework": "mocha",
+    "templateFramework": "handlebars",
+    "compassBootstrap": true,
+    "includeRequireJS": false
+  }
+}
