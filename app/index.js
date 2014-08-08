@@ -153,7 +153,8 @@ Generator.prototype.writeIndex = function writeIndex() {
     'bower_components/jquery/dist/jquery.js',
     'bower_components/yepnope/yepnope.js',
     'bower_components/underscore/underscore.js',
-    'bower_components/backbone/backbone.js'
+    'bower_components/backbone/backbone.js',
+    'bower_components/moment/min/moment-with-locales.min.js'
   ];
 
   if (this.templateFramework === 'handlebars') {
@@ -186,6 +187,9 @@ Generator.prototype.writeIndex = function writeIndex() {
     searchPath: ['.tmp', this.env.options.appPath],
     optimizedPath: 'scripts/main.js',
     sourceFileList: [
+      'scripts/utils/ext_String.js',
+      'scripts/utils/ext_Number.js',
+      'scripts/lib/handlebarsHelpers.js',
       'scripts/lib/backbone-app.js',
       'scripts/lib/backbone-system.js',
       'scripts/lib/backbone-locale.js',
@@ -196,7 +200,7 @@ Generator.prototype.writeIndex = function writeIndex() {
       'scripts/main.js',
       'scripts/router.js',
       'scripts/templates.js'
-      
+
     ]
   });
 };
@@ -220,6 +224,7 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.mkdir(this.env.options.appPath + '/scripts/collections/');
   this.mkdir(this.env.options.appPath + '/scripts/views/');
   this.mkdir(this.env.options.appPath + '/scripts/models/');
+  this.mkdir(this.env.options.appPath + '/scripts/utils/');
   this.mkdir(this.env.options.appPath + '/styles');
   this.mkdir(this.env.options.appPath + '/images');
   this.mkdir(this.env.options.appPath + '/styles/fonts');
@@ -227,6 +232,7 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.copy('app/favicon.ico', this.env.options.appPath + '/favicon.ico');
   this.copy('app/robots.txt', this.env.options.appPath + '/robots.txt');
   this.copy('app/htaccess', this.env.options.appPath + '/.htaccess');
+  this.copy('app/scripts/lib/handlebarsHelpers.coffee', this.env.options.appPath + '/scripts/lib/handlebarsHelpers.coffee');
   this.copy('app/scripts/lib/backbone-app.coffee', this.env.options.appPath + '/scripts/lib/backbone-app.coffee');
   this.copy('app/scripts/lib/backbone-locale.coffee', this.env.options.appPath + '/scripts/lib/backbone-locale.coffee');
   this.copy('app/scripts/lib/backbone-system.coffee', this.env.options.appPath + '/scripts/lib/backbone-system.coffee');
@@ -237,6 +243,8 @@ Generator.prototype.setupEnv = function setupEnv() {
   this.copy('app/scripts/locale/strings-en.coffee', this.env.options.appPath + '/scripts/locale/strings-en.coffee');
   this.copy('app/scripts/locale/strings-es.coffee', this.env.options.appPath + '/scripts/locale/strings-es.coffee');
   this.copy('app/scripts/models/backbone.sync.js', this.env.options.appPath + '/scripts/models/backbone.sync.js');
+  this.copy('app/scripts/utils/ext_Number.coffee', this.env.options.appPath + '/scripts/utils/ext_Number.coffee');
+  this.copy('app/scripts/utils/ext_String.coffee', this.env.options.appPath + '/scripts/utils/ext_String.coffee');
   this.copy('app/scripts/views/element_view.js.coffee', this.env.options.appPath + '/scripts/views/element_view.js.coffee');
   this.copy('app/scripts/views/d3_view.js.coffee', this.env.options.appPath + '/scripts/views/d3_view.js.coffee');
   this.copy('app/scripts/views/collection_view.js.coffee', this.env.options.appPath + '/scripts/views/collection_view.js.coffee');
@@ -251,7 +259,7 @@ Generator.prototype.mainJs = function mainJs() {
   }
   this.writeTemplate('main', this.env.options.appPath + '/scripts/main');
   this.writeTemplate('router', this.env.options.appPath + '/scripts/router');
-  
+
 };
 
 Generator.prototype.createAppFile = function createAppFile() {
@@ -260,5 +268,5 @@ Generator.prototype.createAppFile = function createAppFile() {
   }
   this.writeTemplate('app', this.env.options.appPath + '/scripts/main');
   this.writeTemplate('router', this.env.options.appPath + '/scripts/router');
-  
+
 };

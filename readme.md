@@ -5,7 +5,7 @@ Maintainer: [Miguel Cardoso](https://github.com/Thr44)
 
 A Backbone generator forked from Revath S Kumar https://github.com/yeoman/generator-backbone, with some extra components originally developed by http://www.aerstudio.com/ and extended by thr44
 
-by default it uses Handlebars framework
+by default, it uses Handlebars framework
 
 
 
@@ -25,6 +25,24 @@ Run `yo bestiario`, optionally passing an app name:
 yo bestiario [app-name]
 ```
 
+## In case of phonegap usage:
+
+Install: `npm install -g generator-bestiario`
+
+Run `cordova create my-new-project org.bundlename.my-new-project "my-new-project"`
+```
+`cd my-new-project`
+```
+Run `yo bestiario`, optionally passing an app name:
+```
+yo bestiario [app-name]
+```
+`yo bestiario`, optionally passing an app name:
+```
+yo bestiario [app-name]
+```
+
+
 ## Backbone App
 
 Available functions:
@@ -43,6 +61,11 @@ Available functions:
   - Backbone.System.supportSessionStorage()
   - Backbone.System.supportWebgl()
   - Backbone.System.supportWorker()
+
+  - Backbone.Locale
+
+  - Backbone.HandlebarsHelpers:
+      (t, capitalize, toLowerCase, toUpperCase, prettyCurrency, prettyNumber, isEmail)
 
 
 ## Generators
