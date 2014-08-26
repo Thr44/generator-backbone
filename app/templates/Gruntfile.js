@@ -366,7 +366,7 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     src: [
-                        '<%= yeoman.dist %>/scripts/{,^((?!locale).)*$/}*.js',
+                        '<%%= yeoman.dist %>/scripts/{,^((?!locale).)*$/}*.js',
                         '<%%= yeoman.dist %>/styles/{,*/}*.css',
                         '<%%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp}',
                         '<%= yeoman.dist %>/styles/fonts/{,*/}*.*',<% if (compassBootstrap) { %>
