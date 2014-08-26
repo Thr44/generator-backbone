@@ -1,5 +1,5 @@
 
-### 
+###
 to load data, use a collection or model and extend the parse method!
 example: (requires d3!)
 
@@ -23,7 +23,7 @@ class Backbone.d3View extends Backbone.ElementView
   modelDidDestroy: ->
 
   viewWillRender: ->
-    
+
   viewDidRender: ->
 
   viewWillRemove: ->
@@ -72,7 +72,7 @@ class Backbone.d3View extends Backbone.ElementView
       do @_serializeData
 
       template = do @_chooseTemplate
-      
+
       @$el.html( template( @templateData ) )
 
       if not @$el.attr('id')? and @idRoot?
@@ -85,3 +85,5 @@ class Backbone.d3View extends Backbone.ElementView
       do @viewWillUpdate
 
       _.defer(@viewDidUpdate)
+
+      this
