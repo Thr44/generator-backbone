@@ -6,7 +6,7 @@ class <%= _.camelize(appname) %>.Router extends Backbone.Router
   routes:
     "example": 'example'
     'receiveArgsExample/:argument0': 'receiveArgsExample'
-    '*path':'start' 
+    '*path':'start'
 
   example:->
     do @before_any
@@ -26,7 +26,3 @@ class <%= _.camelize(appname) %>.Router extends Backbone.Router
 
   composeLayout:()=>
     log "!!!!!!!!!!!!set anything for composing layout here!"
-    
-
-    
-
