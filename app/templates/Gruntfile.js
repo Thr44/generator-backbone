@@ -49,7 +49,7 @@ module.exports = function (grunt) {
             },<% } %>
             livereload: {
                 options: {
-                    livereload: LIVERELOAD_PORT
+                    livereload: grunt.option('livereloadport') || LIVERELOAD_PORT
                 },
                 files: [
                     '<%%= yeoman.app %>/*.html',
@@ -86,7 +86,7 @@ module.exports = function (grunt) {
         },
         connect: {
             options: {
-                port: SERVER_PORT,
+                port: grunt.option('port') || SERVER_PORT,
                 // change this to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
             },
@@ -153,7 +153,7 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     run: true,
-                    src: ['http://localhost:<%%= connect.test.options.port %>/index.html']
+                    urls: ['http://localhost:<%%= connect.test.options.port %>/index.html']
                 }
             }
         }<% } else { %>,
@@ -164,8 +164,8 @@ module.exports = function (grunt) {
                     keepRunner: true,
                     specs : 'test/spec/**/*.js',
                     vendor : [
-                        '<%%= yeoman.app %>/bower_components/jquery/jquery.js',
-                        '<%%= yeoman.app %>/bower_components/underscore/underscore.js',
+                        '<%%= yeoman.app %>/bower_components/jquery/dist/jquery.js',
+                        '<%%= yeoman.app %>/bower_components/lodash/dist/lodash.js',
                         '<%%= yeoman.app %>/bower_components/backbone/backbone.js',
                         '.tmp/scripts/templates.js'
                     ]
@@ -229,9 +229,9 @@ module.exports = function (grunt) {
                     optimize: 'none',
                     paths: {
                         'templates': '../../.tmp/scripts/templates',
-                        'jquery': '../../app/bower_components/jquery/jquery',
-                        'underscore': '../../app/bower_components/underscore/underscore',
-                        'backbone': '../../app/bower_components/backbone/backbone'
+                        'jquery': '../../<%%= yeoman.app %>/bower_components/jquery/dist/jquery',
+                        'underscore': '../../<%%= yeoman.app %>/bower_components/lodash/dist/lodash',
+                        'backbone': '../../<%%= yeoman.app %>/bower_components/backbone/backbone'
                     },
                     // TODO: Figure out how to make sourcemaps work with grunt-usemin
                     // https://github.com/yeoman/grunt-usemin/issues/30
@@ -402,7 +402,7 @@ module.exports = function (grunt) {
                 'compass:server',<% } %>
                 'connect:test',
                 'open:test',
-                'watch:livereload'
+                'watch'
             ]);
         }
 
@@ -432,8 +432,7 @@ module.exports = function (grunt) {
                 'compass',<% } %><% if(testFramework === 'mocha') { %>
                 'connect:test',
                 'mocha',<% } else { %>
-                'jasmine',<% } %>
-                'watch:test'
+                'jasmine'<% } %>
             ];
 
         if(!isConnected) {

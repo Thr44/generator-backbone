@@ -5,268 +5,316 @@ var yeoman = require('yeoman-generator');
 var scriptBase = require('../script-base');
 var backboneUtils = require('../util.js');
 
-var Generator = module.exports = function Generator(args, options, config) {
-  yeoman.generators.Base.apply(this, arguments);
+var BestiarioGenerator = yeoman.generators.Base.extend({
+  constructor: function () {
+    yeoman.generators.Base.apply(this, arguments);
 
-  this.argument('appname', { type: String, required: false });
-  this.appname = this.appname || path.basename(process.cwd());
-  this.appname = backboneUtils.classify(this.appname);
-
-  this.env.options.appPath = this.options.appPath || 'app';
-  this.config.set('appPath', this.env.options.appPath);
-
-  this.testFramework = this.options['test-framework'] || 'mocha';
-  this.templateFramework = this.options['template-framework'] || 'handlebars';
-
-  if (['app', 'bestiario'].indexOf(this.generatorName) >= 0) {
-    this.hookFor(this.testFramework, {
-      as: 'app',
-      options: {
-        'skip-install': this.options['skip-install'],
-        'ui': this.options.ui
-      }
+    this.option('appPath', {
+      desc: 'Name of application directory',
+      type: 'String',
+      defaults: 'app',
+      banner: 'some banner'
     });
-  }
 
-  this.config.defaults({
-    appName: this.appname,
-    ui: this.options.ui,
-    coffee: this.options.coffee,
-    testFramework: this.testFramework,
-    templateFramework: this.templateFramework,
-    compassBootstrap: this.compassBootstrap,
-    includeRequireJS: this.includeRequireJS
-  });
+    this.option('requirejs', {
+      desc: 'Support requirejs',
+      defaults: false
+    });
 
-  this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
+    this.option('template-framework', {
+      desc: 'Choose template framework. lodash/handlebars/mustashe',
+      type: 'String',
+      defaults: 'handlebars'
+    });
 
-  this.on('end', function () {
-    if (['app', 'bestiario'].indexOf(this.generatorName) >= 0) {
-      if (/^.*test$/.test(process.cwd())) {
-        process.chdir('..');
+    this.option('test-framework', {
+      desc: 'Choose test framework. mocha/jasmine',
+      type: 'String',
+      defaults: 'mocha'
+    });
+
+    this.testFramework = this.options['test-framework'];
+    this.templateFramework = this.options['template-framework'];
+
+    this.argument('app_name', { type: String, required: false });
+    this.appname = this.app_name || this.appname;
+    this.appname = this._.classify(this.appname);
+
+    this.env.options.appPath = this.options.appPath || 'app';
+    this.config.set('appPath', this.env.options.appPath);
+
+    this.testFramework = this.options['test-framework'] || 'mocha';
+    this.templateFramework = this.options['template-framework'] || 'lodash';
+
+    if (['bestiario:app', 'bestiario'].indexOf(this.options.namespace) >= 0) {
+      this.hookFor(this.testFramework, {
+        as: 'app',
+        options: {
+          'skip-install': this.options['skip-install'],
+          'ui': this.options.ui
+        }
+      });
+    }
+
+    this.config.defaults({
+      appName: this.appname,
+      ui: this.options.ui,
+      coffee: this.options.coffee,
+      testFramework: this.testFramework,
+      templateFramework: this.templateFramework,
+      compassBootstrap: this.compassBootstrap,
+      includeRequireJS: this.includeRequireJS
+    });
+
+    this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
+  },
+
+  prompting: function () {
+    var cb = this.async();
+
+    // welcome message
+    this.log(this.yeoman);
+    this.log('Out of the box I include HTML5 Boilerplate, jQuery, Backbone.js and Modernizr.');
+
+    var prompts = [{
+      type: 'checkbox',
+      name: 'features',
+      message: 'What more would you like?',
+      choices: [{
+        name: 'Twitter Bootstrap for Sass',
+        value: 'compassBootstrap',
+        checked: true
+      }, {
+        name: 'Use CoffeeScript',
+        value: 'coffee',
+        checked: this.options.coffee || true
+      }, {
+        name: 'Use RequireJs',
+        value: 'requirejs',
+        checked: this.options.requirejs || false
+      }]
+    }];
+
+    this.prompt(prompts, function (answers) {
+      var features = answers.features;
+
+      function hasFeature(feat) { return features.indexOf(feat) !== -1; }
+
+      // manually deal with the response, get back and store the results.
+      // we change a bit this way of doing to automatically do this in the self.prompt() method.
+      this.compassBootstrap = hasFeature('compassBootstrap');
+      this.includeRequireJS = hasFeature('requirejs');
+      this.config.set('compassBootstrap', this.compassBootstrap);
+
+
+      if (!this.options.coffee) {
+        this.options.coffee = hasFeature('coffee');
+        this.config.set('coffee', this.options.coffee);
       }
+
+      if (!this.options.requirejs) {
+        this.options.requirejs = this.includeRequireJS;
+        this.config.set('includeRequireJS', this.includeRequireJS);
+      }
+      cb();
+    }.bind(this));
+  },
+
+  writing: {
+
+    git: function () {
+      this.template('gitignore', '.gitignore');
+      this.copy('gitattributes', '.gitattributes');
+    },
+
+    bower: function () {
+      this.template('bowerrc', '.bowerrc');
+      this.copy('_bower.json', 'bower.json');
+    },
+
+    jshint: function () {
+      this.copy('jshintrc', '.jshintrc');
+    },
+
+    editorConfig: function () {
+      this.copy('editorconfig', '.editorconfig');
+    },
+
+    gruntfile: function () {
+      this.template('Gruntfile.js');
+    },
+
+    packageJSON: function () {
+      this.template('_package.json', 'package.json');
+    },
+
+    mainStylesheet: function () {
+      var contentText = [
+        'body {\n    background: #fafafa;\n}',
+        '\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}'
+      ];
+      var ext = '.css';
+      if (this.compassBootstrap) {
+        this.template('main.scss', this.env.options.appPath + '/styles/main.scss');
+        return;
+      }
+      this.write(this.env.options.appPath + '/styles/main' + ext, contentText.join('\n'));
+    },
+
+    writeIndex: function () {
+      if (this.includeRequireJS) {
+        return;
+      }
+
+      this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
+      this.indexFile = this.engine(this.indexFile, this);
+
+      var vendorJS = [
+        'bower_components/jquery/dist/jquery.js',
+        'bower_components/yepnope/yepnope.js',
+        'bower_components/underscore/underscore.js',
+        'bower_components/backbone/backbone.js',
+        'bower_components/moment/min/moment-with-locales.min.js'
+      ];
+
+      if (this.templateFramework === 'handlebars') {
+        vendorJS.push('bower_components/handlebars/handlebars.js');
+      }
+
+      this.indexFile = this.appendScripts(this.indexFile, 'scripts/vendor.js', vendorJS);
+
+      if (this.compassBootstrap) {
+        // wire Twitter Bootstrap plugins
+        this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
+          'bower_components/sass-bootstrap/js/affix.js',
+          'bower_components/sass-bootstrap/js/alert.js',
+          'bower_components/sass-bootstrap/js/dropdown.js',
+          'bower_components/sass-bootstrap/js/tooltip.js',
+          'bower_components/sass-bootstrap/js/modal.js',
+          'bower_components/sass-bootstrap/js/transition.js',
+          'bower_components/sass-bootstrap/js/button.js',
+          'bower_components/sass-bootstrap/js/popover.js',
+          'bower_components/sass-bootstrap/js/carousel.js',
+          'bower_components/sass-bootstrap/js/scrollspy.js',
+          'bower_components/sass-bootstrap/js/collapse.js',
+          'bower_components/sass-bootstrap/js/tab.js'
+        ]);
+      }
+
+      this.indexFile = this.appendFiles({
+        html: this.indexFile,
+        fileType: 'js',
+        searchPath: ['.tmp', this.env.options.appPath],
+        optimizedPath: 'scripts/main.js',
+        sourceFileList: [
+          'scripts/utils/ext_String.js',
+          'scripts/utils/ext_Number.js',
+          'scripts/lib/handlebarsHelpers.js',
+          'scripts/lib/backbone-app.js',
+          'scripts/lib/backbone-system.js',
+          'scripts/lib/backbone-locale.js',
+          'scripts/models/backbone.sync.js',
+          'scripts/views/element_view.js',
+          'scripts/views/collection_view.js',
+          'scripts/views/d3_view.js',
+          'scripts/main.js',
+          'scripts/router.js',
+          'scripts/templates.js'
+        ]
+      });
+    },
+
+    writeIndexWithRequirejs: function () {
+      if (!this.includeRequireJS) {
+        return;
+      }
+      this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
+      this.indexFile = this.engine(this.indexFile, this);
+
+      this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
+        'bower_components/requirejs/require.js'
+      ], {'data-main': 'scripts/main'});
+    },
+
+    setupEnv: function () {
+      this.mkdir(this.env.options.appPath);
+      this.mkdir(this.env.options.appPath + '/scripts');
+      this.mkdir(this.env.options.appPath + '/scripts/vendor/');
+      this.mkdir(this.env.options.appPath + '/scripts/collections/');
+      this.mkdir(this.env.options.appPath + '/scripts/views/');
+      this.mkdir(this.env.options.appPath + '/scripts/models/');
+      this.mkdir(this.env.options.appPath + '/scripts/utils/');
+      this.mkdir(this.env.options.appPath + '/styles');
+      this.mkdir(this.env.options.appPath + '/images');
+      this.mkdir(this.env.options.appPath + '/styles/fonts');
+      this.copy('app/404.html', this.env.options.appPath + '/404.html');
+      this.copy('app/favicon.ico', this.env.options.appPath + '/favicon.ico');
+      this.copy('app/robots.txt', this.env.options.appPath + '/robots.txt');
+      this.copy('app/htaccess', this.env.options.appPath + '/.htaccess');
+      this.copy('app/scripts/lib/handlebarsHelpers.coffee', this.env.options.appPath + '/scripts/lib/handlebarsHelpers.coffee');
+      this.copy('app/scripts/lib/backbone-app.coffee', this.env.options.appPath + '/scripts/lib/backbone-app.coffee');
+      this.copy('app/scripts/lib/backbone-locale.coffee', this.env.options.appPath + '/scripts/lib/backbone-locale.coffee');
+      this.copy('app/scripts/lib/backbone-system.coffee', this.env.options.appPath + '/scripts/lib/backbone-system.coffee');
+      this.copy('app/scripts/lib/lorem/lorem.js', this.env.options.appPath + '/scripts/lib/lorem/lorem.js');
+      this.copy('app/scripts/locale/lorem.js', this.env.options.appPath + '/scripts/locale/lorem.js');
+      this.copy('app/scripts/locale/lorem.starwars.js', this.env.options.appPath + '/scripts/locale/lorem.starwars.js');
+      this.copy('app/scripts/locale/lorem.futurama.js', this.env.options.appPath + '/scripts/locale/lorem.futurama.js');
+      this.copy('app/scripts/locale/strings-en.coffee', this.env.options.appPath + '/scripts/locale/strings-en.coffee');
+      this.copy('app/scripts/locale/strings-es.coffee', this.env.options.appPath + '/scripts/locale/strings-es.coffee');
+      this.copy('app/scripts/models/backbone.sync.js', this.env.options.appPath + '/scripts/models/backbone.sync.js');
+      this.copy('app/scripts/utils/ext_Number.coffee', this.env.options.appPath + '/scripts/utils/ext_Number.coffee');
+      this.copy('app/scripts/utils/ext_String.coffee', this.env.options.appPath + '/scripts/utils/ext_String.coffee');
+      this.copy('app/scripts/views/element_view.js.coffee', this.env.options.appPath + '/scripts/views/element_view.js.coffee');
+      this.copy('app/scripts/views/d3_view.js.coffee', this.env.options.appPath + '/scripts/views/d3_view.js.coffee');
+      this.copy('app/scripts/views/collection_view.js.coffee', this.env.options.appPath + '/scripts/views/collection_view.js.coffee');
+      this.copy('app/styles/_media_queries.scss', this.env.options.appPath + '/styles/_media_queries.scss');
+      this.copy('app/styles/_variables.scss', this.env.options.appPath + '/styles/_variables.scss');
+      this.write(this.env.options.appPath + '/index.html', this.indexFile);
+    },
+
+    createRequireJsAppFile: function () {
+      if (!this.includeRequireJS) {
+        return;
+      }
+      this._writeTemplate('requirejs_app', this.env.options.appPath + '/scripts/main');
+      this._writeTemplate('requirejs_app', this.env.options.appPath + '/scripts/router');
+    },
+
+    createAppFile: function () {
+      if (this.includeRequireJS) {
+        return;
+      }
+      this._writeTemplate('app', this.env.options.appPath + '/scripts/main');
+      this.writeTemplate('router', this.env.options.appPath + '/scripts/router');
+    }
+  },
+
+  setSuffix: function () {
+    this.scriptSuffix = '.js';
+
+    if (this.env.options.coffee || this.options.coffee) {
+      this.scriptSuffix = '.coffee';
+    }
+  },
+
+  _writeTemplate: function (source, destination, data) {
+    if (typeof source === 'undefined' || typeof destination === 'undefined') {
+      return;
+    }
+
+    if (typeof this.scriptSuffix === 'undefined') {
+      this.setSuffix();
+    }
+
+    var ext = this.scriptSuffix;
+    this.template(source + ext, destination + ext, data);
+  },
+
+  install: function () {
+    if (['bestiario:app', 'bestiario'].indexOf(this.options.namespace) >= 0) {
       this.installDependencies({ skipInstall: this.options['skip-install'] });
     }
-  });
-};
-
-util.inherits(Generator, scriptBase);
-
-Generator.prototype.askFor = function askFor() {
-  var cb = this.async();
-
-  // welcome message
-  console.log(this.yeoman);
-  console.log('Out of the box I include HTML5 Boilerplate, jQuery, Backbone.js and Modernizr.');
-
-  var prompts = [{
-    type: 'checkbox',
-    name: 'features',
-    message: 'What more would you like?',
-    choices: [{
-      name: 'Bootstrap for Sass',
-      value: 'compassBootstrap',
-      checked: true
-    }, {
-      name: 'Use CoffeeScript',
-      value: 'coffee',
-      checked: this.options.coffee || true
-    }, {
-      name: 'Use RequireJs',
-      value: 'requirejs',
-      checked: this.options.requirejs || false
-    }]
-  }];
-
-  this.prompt(prompts, function (answers) {
-    var features = answers.features;
-
-    function hasFeature(feat) { return features.indexOf(feat) !== -1; }
-
-    // manually deal with the response, get back and store the results.
-    // we change a bit this way of doing to automatically do this in the self.prompt() method.
-    this.compassBootstrap = hasFeature('compassBootstrap');
-    this.includeRequireJS = hasFeature('requirejs');
-    this.config.set('compassBootstrap', this.compassBootstrap);
-
-
-    if (!this.options.coffee) {
-      this.options.coffee = hasFeature('coffee');
-      this.config.set('coffee', this.options.coffee);
-    }
-
-    if (!this.options.requirejs) {
-      this.options.requirejs = this.includeRequireJS;
-      this.config.set('includeRequireJS', this.includeRequireJS);
-    }
-    cb();
-  }.bind(this));
-};
-
-Generator.prototype.git = function git() {
-  this.template('gitignore', '.gitignore');
-  this.copy('gitattributes', '.gitattributes');
-};
-
-Generator.prototype.bower = function bower() {
-  this.template('bowerrc', '.bowerrc');
-  this.copy('_bower.json', 'bower.json');
-};
-
-Generator.prototype.jshint = function jshint() {
-  this.copy('jshintrc', '.jshintrc');
-};
-
-Generator.prototype.editorConfig = function editorConfig() {
-  this.copy('editorconfig', '.editorconfig');
-};
-
-Generator.prototype.gruntfile = function gruntfile() {
-  this.template('Gruntfile.js');
-};
-
-Generator.prototype.packageJSON = function packageJSON() {
-  this.template('_package.json', 'package.json');
-};
-
-Generator.prototype.mainStylesheet = function mainStylesheet() {
-  var contentText = [
-    'body {\n    background: #fafafa;\n}',
-    '\n.hero-unit {\n    margin: 50px auto 0 auto;\n    width: 300px;\n}'
-  ];
-  var ext = '.css';
-  if (this.compassBootstrap) {
-    this.template('main.scss', this.env.options.appPath + '/styles/main.scss');
   }
-  this.write(this.env.options.appPath + '/styles/main' + ext, contentText.join('\n'));
-};
+});
 
-Generator.prototype.writeIndex = function writeIndex() {
-  if (this.includeRequireJS) {
-    return;
-  }
-
-  this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
-  this.indexFile = this.engine(this.indexFile, this);
-
-  var vendorJS = [
-    'bower_components/jquery/dist/jquery.js',
-    'bower_components/yepnope/yepnope.js',
-    'bower_components/underscore/underscore.js',
-    'bower_components/backbone/backbone.js',
-    'bower_components/moment/min/moment-with-locales.min.js'
-  ];
-
-  if (this.templateFramework === 'handlebars') {
-    vendorJS.push('bower_components/handlebars/handlebars.js');
-  }
-
-  this.indexFile = this.appendScripts(this.indexFile, 'scripts/vendor.js', vendorJS);
-
-  if (this.compassBootstrap) {
-    // wire Bootstrap plugins
-    this.indexFile = this.appendScripts(this.indexFile, 'scripts/plugins.js', [
-      'bower_components/sass-bootstrap/js/affix.js',
-      'bower_components/sass-bootstrap/js/alert.js',
-      'bower_components/sass-bootstrap/js/dropdown.js',
-      'bower_components/sass-bootstrap/js/tooltip.js',
-      'bower_components/sass-bootstrap/js/modal.js',
-      'bower_components/sass-bootstrap/js/transition.js',
-      'bower_components/sass-bootstrap/js/button.js',
-      'bower_components/sass-bootstrap/js/popover.js',
-      'bower_components/sass-bootstrap/js/carousel.js',
-      'bower_components/sass-bootstrap/js/scrollspy.js',
-      'bower_components/sass-bootstrap/js/collapse.js',
-      'bower_components/sass-bootstrap/js/tab.js'
-    ]);
-  }
-
-  this.indexFile = this.appendFiles({
-    html: this.indexFile,
-    fileType: 'js',
-    searchPath: ['.tmp', this.env.options.appPath],
-    optimizedPath: 'scripts/main.js',
-    sourceFileList: [
-      'scripts/utils/ext_String.js',
-      'scripts/utils/ext_Number.js',
-      'scripts/lib/handlebarsHelpers.js',
-      'scripts/lib/backbone-app.js',
-      'scripts/lib/backbone-system.js',
-      'scripts/lib/backbone-locale.js',
-      'scripts/models/backbone.sync.js',
-      'scripts/views/element_view.js',
-      'scripts/views/collection_view.js',
-      'scripts/views/d3_view.js',
-      'scripts/main.js',
-      'scripts/router.js',
-      'scripts/templates.js'
-
-    ]
-  });
-};
-
-Generator.prototype.writeIndexWithRequirejs = function writeIndexWithRequirejs() {
-  if (!this.includeRequireJS) {
-    return;
-  }
-  this.indexFile = this.readFileAsString(path.join(this.sourceRoot(), 'index.html'));
-  this.indexFile = this.engine(this.indexFile, this);
-
-  this.indexFile = this.appendScripts(this.indexFile, 'scripts/main.js', [
-    'bower_components/requirejs/require.js'
-  ], {'data-main': 'scripts/main'});
-};
-
-Generator.prototype.setupEnv = function setupEnv() {
-  this.mkdir(this.env.options.appPath);
-  this.mkdir(this.env.options.appPath + '/scripts');
-  this.mkdir(this.env.options.appPath + '/scripts/vendor/');
-  this.mkdir(this.env.options.appPath + '/scripts/collections/');
-  this.mkdir(this.env.options.appPath + '/scripts/views/');
-  this.mkdir(this.env.options.appPath + '/scripts/models/');
-  this.mkdir(this.env.options.appPath + '/scripts/utils/');
-  this.mkdir(this.env.options.appPath + '/styles');
-  this.mkdir(this.env.options.appPath + '/images');
-  this.mkdir(this.env.options.appPath + '/styles/fonts');
-  this.copy('app/404.html', this.env.options.appPath + '/404.html');
-  this.copy('app/favicon.ico', this.env.options.appPath + '/favicon.ico');
-  this.copy('app/robots.txt', this.env.options.appPath + '/robots.txt');
-  this.copy('app/htaccess', this.env.options.appPath + '/.htaccess');
-  this.copy('app/scripts/lib/handlebarsHelpers.coffee', this.env.options.appPath + '/scripts/lib/handlebarsHelpers.coffee');
-  this.copy('app/scripts/lib/backbone-app.coffee', this.env.options.appPath + '/scripts/lib/backbone-app.coffee');
-  this.copy('app/scripts/lib/backbone-locale.coffee', this.env.options.appPath + '/scripts/lib/backbone-locale.coffee');
-  this.copy('app/scripts/lib/backbone-system.coffee', this.env.options.appPath + '/scripts/lib/backbone-system.coffee');
-  this.copy('app/scripts/lib/lorem/lorem.js', this.env.options.appPath + '/scripts/lib/lorem/lorem.js');
-  this.copy('app/scripts/locale/lorem.js', this.env.options.appPath + '/scripts/locale/lorem.js');
-  this.copy('app/scripts/locale/lorem.starwars.js', this.env.options.appPath + '/scripts/locale/lorem.starwars.js');
-  this.copy('app/scripts/locale/lorem.futurama.js', this.env.options.appPath + '/scripts/locale/lorem.futurama.js');
-  this.copy('app/scripts/locale/strings-en.coffee', this.env.options.appPath + '/scripts/locale/strings-en.coffee');
-  this.copy('app/scripts/locale/strings-es.coffee', this.env.options.appPath + '/scripts/locale/strings-es.coffee');
-  this.copy('app/scripts/models/backbone.sync.js', this.env.options.appPath + '/scripts/models/backbone.sync.js');
-  this.copy('app/scripts/utils/ext_Number.coffee', this.env.options.appPath + '/scripts/utils/ext_Number.coffee');
-  this.copy('app/scripts/utils/ext_String.coffee', this.env.options.appPath + '/scripts/utils/ext_String.coffee');
-  this.copy('app/scripts/views/element_view.js.coffee', this.env.options.appPath + '/scripts/views/element_view.js.coffee');
-  this.copy('app/scripts/views/d3_view.js.coffee', this.env.options.appPath + '/scripts/views/d3_view.js.coffee');
-  this.copy('app/scripts/views/collection_view.js.coffee', this.env.options.appPath + '/scripts/views/collection_view.js.coffee');
-  this.copy('app/styles/_media_queries.scss', this.env.options.appPath + '/styles/_media_queries.scss');
-  this.copy('app/styles/_variables.scss', this.env.options.appPath + '/styles/_variables.scss');
-  this.write(this.env.options.appPath + '/index.html', this.indexFile);
-};
-
-Generator.prototype.mainJs = function mainJs() {
-  if (!this.includeRequireJS) {
-    return;
-  }
-  this.writeTemplate('main', this.env.options.appPath + '/scripts/main');
-  this.writeTemplate('router', this.env.options.appPath + '/scripts/router');
-
-};
-
-Generator.prototype.createAppFile = function createAppFile() {
-  if (this.includeRequireJS) {
-    return;
-  }
-  this.writeTemplate('app', this.env.options.appPath + '/scripts/main');
-  this.writeTemplate('router', this.env.options.appPath + '/scripts/router');
-
-};
+module.exports = BestiarioGenerator;
