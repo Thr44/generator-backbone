@@ -276,7 +276,7 @@ var BestiarioGenerator = yeoman.generators.Base.extend({
         return;
       }
       this._writeTemplate('app', this.env.options.appPath + '/scripts/main');
-      this._writeTemplate('router', this.env.options.appPath + '/scripts/router');
+      this._writeTemplate('app/scripts/router', this.env.options.appPath + '/scripts/router');
     },
 
     composeTest: function () {
