@@ -33,8 +33,10 @@ var BestiarioGenerator = yeoman.generators.Base.extend({
       defaults: 'mocha'
     });
 
-    this.testFramework = this.options['test-framework'];
-    this.templateFramework = this.options['template-framework'];
+    this.option('skip-install', {
+      desc: 'Skip the bower and node installations',
+      defaults: false
+    });
 
     this.argument('app_name', { type: String, required: false });
     this.appname = this.app_name || this.appname;
@@ -45,16 +47,6 @@ var BestiarioGenerator = yeoman.generators.Base.extend({
 
     this.testFramework = this.options['test-framework'] || 'mocha';
     this.templateFramework = this.options['template-framework'] || 'lodash';
-
-    if (['bestiario:app', 'bestiario'].indexOf(this.options.namespace) >= 0) {
-      this.hookFor(this.testFramework, {
-        as: 'app',
-        options: {
-          'skip-install': this.options['skip-install'],
-          'ui': this.options.ui
-        }
-      });
-    }
 
     this.config.defaults({
       appName: this.appname,
@@ -277,7 +269,6 @@ var BestiarioGenerator = yeoman.generators.Base.extend({
         return;
       }
       this._writeTemplate('requirejs_app', this.env.options.appPath + '/scripts/main');
-      //this._writeTemplate('requirejs_app', this.env.options.appPath + '/scripts/router');
     },
 
     createAppFile: function () {
@@ -285,7 +276,17 @@ var BestiarioGenerator = yeoman.generators.Base.extend({
         return;
       }
       this._writeTemplate('app', this.env.options.appPath + '/scripts/main');
-      //this._writeTemplate('router', this.env.options.appPath + '/scripts/router');
+      this._writeTemplate('router', this.env.options.appPath + '/scripts/router');
+    },
+
+    composeTest: function () {
+      if (['bestiario:app', 'bestiario'].indexOf(this.options.namespace) >= 0) {
+        this.composeWith(this.testFramework, {
+          'skip-install': this.options['skip-install'],
+          'ui': this.options.ui,
+          'skipMessage': true,
+        });
+      }
     }
   },
 
