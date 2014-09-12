@@ -87,7 +87,8 @@ Backbone.App = (config)->
         lang = conf.lang
       else
         lang = conf.lang.call this
-    console.log "currebt language:", lang
+    if console? and console.log?
+      console.log "currebt language:", lang
     lang || "en"
 
   localeUrl = (lang)->
@@ -113,8 +114,8 @@ Backbone.App = (config)->
       fonts  = conf.fonts
     else
       fonts = conf.fonts.call this
-
-    console.error 'fonts should be an array. Check http://www.google.com/webfonts' unless _.isArray fonts
+    if console? and console.error?
+      console.error 'fonts should be an array. Check http://www.google.com/webfonts' unless _.isArray fonts
 
     window.WebFontConfig =
       google:
@@ -150,7 +151,7 @@ Backbone.App = (config)->
   if window.log?
     logger = window.log
   else
-    if console? and console.log?
+    if console? and console.log? and console.log.apply?
       logger = -> console.log.apply(console, arguments)
     else
       logger = ()->
@@ -170,8 +171,8 @@ Backbone.App = (config)->
 
       window.log = _.bind @log, this
       window.elog = _.bind @errorlog, this
-
-      console.log "DEBUG MODE ON" if @isDebug
+      if console? and console.log?
+        console.log "DEBUG MODE ON" if @isDebug
 
       @stage = stage || $('body')
       @system = Backbone.System
@@ -219,7 +220,8 @@ Backbone.App = (config)->
       return if @isDebug or not window._gaq?
       args = Array.prototype.splice.call(arguments, 0)
       payload = ['_trackEvent'].concat args
-      console.log "Tracking Event:", payload
+      if console? and console.log?
+        console.log "Tracking Event:", payload
       window._gaq.push payload
 
   do loadFonts
