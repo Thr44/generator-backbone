@@ -49,7 +49,7 @@ class Backbone.d3View extends Backbone.ElementView
 
   _modelWillChange: ->
     do @modelDidChange
-    if not @rendered?
+    if not @rendered
       do @render
     else
       do @_viewUpdate
